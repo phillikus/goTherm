@@ -3,13 +3,10 @@ package api
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 )
 
 func PushThermData(responseWriter http.ResponseWriter, request *http.Request) {
-	log.Output(1, "Calling /therm...")
-
 	if request.Method != "POST" {
 		panic("Only POST allowed for this method")
 	}
@@ -23,5 +20,11 @@ func PushThermData(responseWriter http.ResponseWriter, request *http.Request) {
 		fmt.Fprintf(responseWriter, message)
 	} else {
 		panic("An error has ocurred")
+	}
+}
+
+func HandlePushThermData() http.HandlerFunc {
+	return func(responseWriter http.ResponseWriter, request *http.Request) {
+		PushThermData(responseWriter, request)
 	}
 }

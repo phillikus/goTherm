@@ -23,7 +23,7 @@ func TestPushThermData(t *testing.T) {
 	handler.ServeHTTP(requestRecorder, req)
 
 	if status := requestRecorder.Code; status != http.StatusOK {
-		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
+		t.Errorf("handler returned wrong status code: got %v instead of %v", status, http.StatusOK)
 	}
 }
 

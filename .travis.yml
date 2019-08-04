@@ -1,4 +1,3 @@
 language: go
 script: 
-  - cd src/webapp/api
-  - go test -v
+  - go test -v .src/webapp/api
