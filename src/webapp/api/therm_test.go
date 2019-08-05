@@ -18,7 +18,7 @@ func TestPushThermData(t *testing.T) {
 	req.Header.Set("Content-Type", "text/plain")
 
 	requestRecorder := httptest.NewRecorder()
-	handler := http.HandlerFunc(PushThermData)
+	handler := HandlePushThermData()
 
 	handler.ServeHTTP(requestRecorder, req)
 
