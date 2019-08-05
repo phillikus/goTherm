@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=db_user
+      - POSTGRES_PASSWORD_FILE=/run/secrets/psql_pw
+      - POSTGRES_DB=therm_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432 
+    secrets:
+      - psql_pw
+
+secrets:
+  psql_pw:
+    file: ./local_secrets/psql_pwd.txt
+
+volumes:
+  db_data:
