@@ -2,21 +2,20 @@ package api
 
 import (
 	"fmt"
+	"github.com/phillikus/goTherm/src/webapp/config"
 	"io/ioutil"
 	"net/http"
 )
 
-func HandlePushThermData() http.HandlerFunc {
+func HandlePushThermData(config *config.Config) http.HandlerFunc {
 	return func(responseWriter http.ResponseWriter, request *http.Request) {
-		pushThermData(responseWriter, request)
+		if request.Method == "POST" {
+			pushThermData(responseWriter, request)
+		}
 	}
 }
 
 func pushThermData(responseWriter http.ResponseWriter, request *http.Request) {
-	if request.Method != "POST" {
-		panic("Only POST allowed for this method")
-	}
-
 	body, err := ioutil.ReadAll(request.Body)
 	defer request.Body.Close()
 

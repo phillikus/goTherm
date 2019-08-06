@@ -8,15 +8,21 @@ services:
       - POSTGRES_PASSWORD_FILE=/run/secrets/psql_pw
       - POSTGRES_DB=therm_db
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - ./postgres-data:/var/lib/postgresql/data
     ports:
       - 5432:5432 
     secrets:
       - psql_pw
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U db_user -d therm_db"]
+      timeout: 10s
+      interval: 1m
+      retries: 3
 
 secrets:
   psql_pw:
     file: ./local_secrets/psql_pwd.txt
 
 volumes:
-  db_data:
+  postgres-data:

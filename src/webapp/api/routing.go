@@ -1,18 +1,19 @@
 package api
 
 import (
+	"github.com/phillikus/goTherm/src/webapp/config"
 	"log"
 	"net/http"
 	"os"
 )
 
-func InitRoutes() {
+func InitRoutes(config *config.Config) {
 	fileServer := http.FileServer(http.Dir("static"))
 	logger := log.New(os.Stderr, "", log.LstdFlags)
 
 	http.HandleFunc("/", HandleLogging(home, logger))
 	http.Handle("/static/", http.StripPrefix("/static/", fileServer))
-	http.HandleFunc("/therm", HandleLogging(HandlePushThermData(), logger))
+	http.HandleFunc("/therm", HandleLogging(HandlePushThermData(config), logger))
 
 	err := http.ListenAndServe(":5000", nil)
 
