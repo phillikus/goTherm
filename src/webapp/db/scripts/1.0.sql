@@ -1,0 +1,8 @@
+CREATE SCHEMA dbo;
+
+CREATE TABLE dbo.versions (id serial PRIMARY KEY, name varchar(20) NOT NULL, script_date DATE NOT NULL DEFAULT CURRENT_DATE)
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA dbo TO db_user;
+
+INSERT INTO dbo.versions (name)
+VALUES ('1.0')

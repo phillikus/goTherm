@@ -1,0 +1,1 @@
+CREATE TABLE dbo.temperature (id serial PRIMARY KEY, temperature numeric(6, 2), create_date DATE NOT NULL DEFAULT CURRENT_DATE)
