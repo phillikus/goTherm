@@ -21,7 +21,7 @@ func HandlePushThermData(config *config.Config, repository api_interfaces.ITherm
 }
 
 func getLatest(responseWriter http.ResponseWriter, request *http.Request, repository api_interfaces.IThermRepository) {
-	lastEntries := repository.GetLatest(5)
+	lastEntries := repository.GetLatest(1)
 	json, err := json.Marshal(lastEntries)
 
 	if err != nil {

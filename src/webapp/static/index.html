@@ -5,13 +5,18 @@
     <title>mcu Therm</title>
 </head>
 <body>
-    <h2 id="temp">Temp</h2>
+    <h2 id="temp" />
 </body>
 </html>
 
 <script>
-    function subscribe() {
-        //TODO: call API and display temp
+    async function subscribe() {
+        const response = await fetch('/therm');
+        const json = await response.json();
+
+        var tempDiv = document.getElementById('temp');
+        tempDiv.innerHTML = "Temparatur: " + json[0].Temperature + "°C";
+        setTimeout(subscribe, 5000);
     };
     subscribe();
 </script>
