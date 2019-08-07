@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/phillikus/goTherm/src/webapp/config"
+	"github.com/phillikus/goTherm/src/webapp/db"
 	"log"
 	"net/http"
 	"os"
@@ -13,7 +14,11 @@ func InitRoutes(config *config.Config) {
 
 	http.HandleFunc("/", HandleLogging(home, logger))
 	http.Handle("/static/", http.StripPrefix("/static/", fileServer))
-	http.HandleFunc("/therm", HandleLogging(HandlePushThermData(config), logger))
+
+	repository := db.ThermRepository{
+		Config: config,
+	}
+	http.HandleFunc("/therm", HandleLogging(HandlePushThermData(config, &repository), logger))
 
 	err := http.ListenAndServe(":5000", nil)
 

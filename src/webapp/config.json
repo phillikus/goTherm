@@ -1,7 +1,5 @@
 {
     "database": {
-        "host": "localhost",
-        "user": "db_user",
-        "password": "Start123"
+        "connectionString": "host=localhost port=5432 user=db_user password=Start123 dbname=therm_db sslmode=disable"
     }
 }

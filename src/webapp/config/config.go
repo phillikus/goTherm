@@ -8,9 +8,7 @@ import (
 
 type Config struct {
 	Database struct {
-		Host     string `json:"host"`
-		User     string `json:"user"`
-		Password string `json:"password"`
+		ConnectionString string `json:connectionString`
 	} `json:"database"`
 }
 

@@ -2,6 +2,7 @@ package api
 
 import (
 	"bytes"
+	"github.com/phillikus/goTherm/src/webapp/api/interfaces"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -18,7 +19,7 @@ func TestPushThermData(t *testing.T) {
 	req.Header.Set("Content-Type", "text/plain")
 
 	requestRecorder := httptest.NewRecorder()
-	handler := HandlePushThermData(nil)
+	handler := HandlePushThermData(nil, &thermRepositoryFake{})
 
 	handler.ServeHTTP(requestRecorder, req)
 
@@ -33,4 +34,15 @@ func TestPushThermDataInvalidMethod(t *testing.T) {
 	if err != nil {
 		panic("Invalid request type should panic")
 	}
+}
+
+type thermRepositoryFake struct {
+}
+
+func (repository *thermRepositoryFake) Insert(data api_interfaces.ThermData) {
+	return
+}
+
+func (repository *thermRepositoryFake) GetLatest(count int) []api_interfaces.ThermData {
+	return []api_interfaces.ThermData{}
 }

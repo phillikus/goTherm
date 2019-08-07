@@ -17,7 +17,7 @@ func TestLoadConfigurationInvalidPath(t *testing.T) {
 func TestLoadConfigurationEmptyJson(t *testing.T) {
 	config := LoadConfiguration("test_data/empty_config.json")
 
-	if config.Database.Host != "" || config.Database.User != "" || config.Database.Password != "" {
+	if config.Database.ConnectionString != "" {
 		t.Errorf("Opening empty config file should not provide any data")
 	}
 }
@@ -25,13 +25,9 @@ func TestLoadConfigurationEmptyJson(t *testing.T) {
 func TestLoadConfigurationValidJson(t *testing.T) {
 	config := LoadConfiguration("test_data/valid_config.json")
 
-	if config.Database.Host != "localhost" {
-		t.Errorf("Host read incorrectly: expected: %v but was %v", "localhost", config.Database.Host)
-	}
-	if config.Database.User != "user" {
-		t.Errorf("User read incorrectly: expected: %v but was %v", "user", config.Database.User)
-	}
-	if config.Database.Password != "Test123" {
-		t.Errorf("Password read incorrectly: expected: %v but was %v", "Test123", config.Database.Password)
+	expected := "host=localhost port=5432 user=testuser password=Test123 dbname=testdb"
+
+	if config.Database.ConnectionString != expected {
+		t.Errorf("ConnectionString read incorrectly: expected: %v but was %v", expected, config.Database.ConnectionString)
 	}
 }
