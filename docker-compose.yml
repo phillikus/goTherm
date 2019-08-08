@@ -20,6 +20,15 @@ services:
       interval: 1m
       retries: 3
 
+  webapp:
+    build:
+      context: ./src/webapp
+      dockerfile: Dockerfile
+    links:
+      - postgres
+    ports:
+      - "5000:5000"
+
 secrets:
   psql_pw:
     file: ./local_secrets/psql_pwd.txt
