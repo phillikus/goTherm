@@ -1,0 +1,3 @@
+- fix db access from docker file
+- add tests for db layer
+- implement multi stage docker file
