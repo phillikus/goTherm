@@ -14,9 +14,9 @@ services:
     secrets:
       - psql_pw
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U db_user -d therm_db"]
+      test: pg_isready -U db_user -d therm_db
       timeout: 10s
-      interval: 10m
+      interval: 1m
       retries: 3
 
   webapp:
