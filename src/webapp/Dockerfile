@@ -7,9 +7,17 @@ ADD . /go/src/github.com/phillikus/goTherm/src/webapp
 
 WORKDIR /go/src/github.com/phillikus/goTherm/src/webapp
 
-RUN go get github.com/lib/pq && go build -o main
+RUN go get github.com/lib/pq && CGO_ENABLED=0 GOOS=linux go build -o main
+
+FROM alpine:latest as runner
+
+# TODO: remove curl and use custom go program for health check in docker-compose.yml
+RUN apk --no-cache add curl
+
+COPY --from=builder /go/src/github.com/phillikus/goTherm/src/webapp .
 
 # Document that the service listens on port 5000.
 EXPOSE 5000
 
-CMD ["./main"]
+
+ENTRYPOINT ["./main", "-prod"]

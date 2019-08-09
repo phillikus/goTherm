@@ -1,6 +1,7 @@
 package config
 
 import (
+	"os"
 	"testing"
 )
 
@@ -11,11 +12,11 @@ func TestLoadConfigurationInvalidPath(t *testing.T) {
 		}
 	}()
 
-	LoadConfiguration("/invalidFilePath")
+	LoadConfigurationFromFile("/invalidFilePath")
 }
 
 func TestLoadConfigurationEmptyJson(t *testing.T) {
-	config := LoadConfiguration("test_data/empty_config.json")
+	config := LoadConfigurationFromFile("test_data/empty_config.json")
 
 	if config.Database.ConnectionString != "" {
 		t.Errorf("Opening empty config file should not provide any data")
@@ -23,9 +24,19 @@ func TestLoadConfigurationEmptyJson(t *testing.T) {
 }
 
 func TestLoadConfigurationValidJson(t *testing.T) {
-	config := LoadConfiguration("test_data/valid_config.json")
+	config := LoadConfigurationFromFile("test_data/valid_config.json")
 
 	expected := "host=localhost port=5432 user=testuser password=Test123 dbname=testdb"
+
+	if config.Database.ConnectionString != expected {
+		t.Errorf("ConnectionString read incorrectly: expected: %v but was %v", expected, config.Database.ConnectionString)
+	}
+}
+
+func TestLoadCOnfigurationFromEnv(t *testing.T) {
+	expected := "host=localhost port=5432 user=testuser password=Test123 dbname=testdb"
+	os.Setenv("CONNECTION_STRING", expected)
+	config := LoadConfigurationFromEnv()
 
 	if config.Database.ConnectionString != expected {
 		t.Errorf("ConnectionString read incorrectly: expected: %v but was %v", expected, config.Database.ConnectionString)

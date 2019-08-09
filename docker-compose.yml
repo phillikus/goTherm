@@ -13,21 +13,27 @@ services:
       - 5432:5432 
     secrets:
       - psql_pw
-
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U db_user -d therm_db"]
       timeout: 10s
-      interval: 1m
+      interval: 10m
       retries: 3
 
   webapp:
     build:
       context: ./src/webapp
       dockerfile: Dockerfile
+    env_file:
+      - ./local_secrets/webapp-env.env
     links:
       - postgres
     ports:
       - "5000:5000"
+    healthcheck:
+      test: curl --fail -s http://localhost:5000/ || exit 1
+      timeout: 10s
+      interval: 10m
+      retries: 3
 
 secrets:
   psql_pw:

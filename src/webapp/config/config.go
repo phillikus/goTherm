@@ -6,13 +6,15 @@ import (
 	"os"
 )
 
-type Config struct {
-	Database struct {
-		ConnectionString string `json:connectionString`
-	} `json:"database"`
+type Database struct {
+	ConnectionString string `json:"connectionString"`
 }
 
-func LoadConfiguration(file string) Config {
+type Config struct {
+	Database Database
+}
+
+func LoadConfigurationFromFile(file string) Config {
 	var config Config
 	configFile, err := os.Open(file)
 	defer configFile.Close()
@@ -25,4 +27,18 @@ func LoadConfiguration(file string) Config {
 	jsonParser.Decode(&config)
 
 	return config
+}
+
+func LoadConfigurationFromEnv() Config {
+	connectionString := os.Getenv("CONNECTION_STRING")
+
+	if connectionString == "" {
+		panic("Could not read connectionString from environment.")
+	}
+
+	return Config{
+		Database: Database{
+			ConnectionString: connectionString,
+		},
+	}
 }
