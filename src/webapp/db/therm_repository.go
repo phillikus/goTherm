@@ -36,8 +36,6 @@ func (repository *ThermRepository) GetLatest(count int) []api_interfaces.ThermDa
 		create_date time.Time
 	)
 
-	var entries []api_interfaces.ThermData
-
 	db := getDbConnection(repository.Config.Database.ConnectionString)
 	defer db.Close()
 
@@ -48,11 +46,14 @@ func (repository *ThermRepository) GetLatest(count int) []api_interfaces.ThermDa
 		panic(err)
 	}
 
+	var entries []api_interfaces.ThermData
+
 	for rows.Next() {
 		err := rows.Scan(&id, &temperature, &create_date)
 		if err != nil {
 			panic(err)
 		}
+
 		entries = append(entries, api_interfaces.ThermData{
 			Id:          id,
 			Temperature: temperature,

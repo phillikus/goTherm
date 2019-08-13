@@ -33,7 +33,7 @@ func TestLoadConfigurationValidJson(t *testing.T) {
 	}
 }
 
-func TestLoadCOnfigurationFromEnv(t *testing.T) {
+func TestLoadConfigurationFromEnv(t *testing.T) {
 	expected := "host=localhost port=5432 user=testuser password=Test123 dbname=testdb"
 	os.Setenv("CONNECTION_STRING", expected)
 	config := LoadConfigurationFromEnv()
