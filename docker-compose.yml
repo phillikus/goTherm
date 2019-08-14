@@ -23,8 +23,6 @@ services:
     build:
       context: ./src/webapp
       dockerfile: Dockerfile
-    env_file:
-      - ./local_secrets/webapp-env.env
     links:
       - postgres
     ports:

@@ -15,6 +15,9 @@ RUN apk --no-cache add curl
 
 COPY --from=builder /go/src/github.com/phillikus/goTherm/src/webapp .
 
+# env variables for development
+ENV CONNECTION_STRING host=postgres port=5432 user=db_user password=Start123 dbname=therm_db sslmode=disable
+
 EXPOSE 5000
 
 ENTRYPOINT ["./main", "-prod"]
