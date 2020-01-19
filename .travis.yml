@@ -1,4 +1,8 @@
 language: go
+
+go:
+  - 1.13.x
+
 script: 
   - go test -v ./src/webapp/config
   - go test -v ./src/webapp/api
