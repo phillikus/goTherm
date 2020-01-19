@@ -1,12 +1,15 @@
 package main
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/phillikus/goTherm/src/webapp/api"
 	"github.com/phillikus/goTherm/src/webapp/config"
-	"os"
 )
 
 func main() {
+	fmt.Println("Starting up API!")
 	args := os.Args[1:]
 	var cfg config.Config
 

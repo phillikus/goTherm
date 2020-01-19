@@ -2,10 +2,11 @@ package db
 
 import (
 	"database/sql"
-	_ "github.com/lib/pq"
-	"github.com/phillikus/goTherm/src/webapp/api/interfaces"
-	"github.com/phillikus/goTherm/src/webapp/config"
+	api_interfaces "goTherm/api/interfaces"
 	"time"
+
+	_ "github.com/lib/pq"
+	"github.com/phillikus/goTherm/src/webapp/config"
 )
 
 type ThermRepository struct {
