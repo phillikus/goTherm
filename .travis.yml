@@ -1,4 +1,4 @@
-go_import_path: github.com/phillikus/goTherm
+go_import_path: goTherm
 
 language: go
 
