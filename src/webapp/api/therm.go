@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/phillikus/goTherm/src/webapp/config"
+	config "goTherm/config"
 )
 
 func HandlePushThermData(config *config.Config, repository api_interfaces.ThermRepository) http.HandlerFunc {

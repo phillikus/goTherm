@@ -3,10 +3,10 @@ package db
 import (
 	"database/sql"
 	api_interfaces "goTherm/api/interfaces"
+	config "goTherm/config"
 	"time"
 
 	_ "github.com/lib/pq"
-	"github.com/phillikus/goTherm/src/webapp/config"
 )
 
 type ThermRepository struct {

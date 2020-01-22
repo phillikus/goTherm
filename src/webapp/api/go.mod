@@ -3,9 +3,13 @@ module goTherm/api
 go 1.13
 
 require (
-	github.com/lib/pq v1.3.0 // indirect
-	github.com/phillikus/goTherm v0.0.0-20191211184658-cfca36d382b0
 	goTherm/api/interfaces v0.0.0
+	goTherm/config v0.0.0
+	goTherm/db v0.0.0
 )
 
 replace goTherm/api/interfaces => ./interfaces
+
+replace goTherm/db => ./../db
+
+replace goTherm/config => ./../config

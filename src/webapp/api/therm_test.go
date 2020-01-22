@@ -2,7 +2,7 @@ package api
 
 import (
 	"bytes"
-	"github.com/phillikus/goTherm/src/webapp/api/interfaces"
+	api_interfaces "gotherm/api/interfaces"
 	"net/http"
 	"net/http/httptest"
 	"testing"
