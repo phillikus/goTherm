@@ -2,16 +2,16 @@ package api
 
 import (
 	"encoding/json"
-	api_interfaces "goTherm/api/interfaces"
+	api "github.com/goTherm/api/interfaces"
 	"io/ioutil"
 	"net/http"
 	"strconv"
 	"time"
 
-	config "goTherm/config"
+	config "github.com/goTherm/config"
 )
 
-func HandlePushThermData(config *config.Config, repository api_interfaces.ThermRepository) http.HandlerFunc {
+func HandlePushThermData(config *config.Config, repository api.ThermRepository) http.HandlerFunc {
 	return func(responseWriter http.ResponseWriter, request *http.Request) {
 		if request.Method == "POST" {
 			add(responseWriter, request, repository)
@@ -21,7 +21,7 @@ func HandlePushThermData(config *config.Config, repository api_interfaces.ThermR
 	}
 }
 
-func getLatest(responseWriter http.ResponseWriter, request *http.Request, repository api_interfaces.ThermRepository) {
+func getLatest(responseWriter http.ResponseWriter, request *http.Request, repository api.ThermRepository) {
 	lastEntries := repository.GetLatest(1)
 	json, err := json.Marshal(lastEntries)
 
@@ -32,7 +32,7 @@ func getLatest(responseWriter http.ResponseWriter, request *http.Request, reposi
 	responseWriter.Write(json)
 }
 
-func add(responseWriter http.ResponseWriter, request *http.Request, repository api_interfaces.ThermRepository) {
+func add(responseWriter http.ResponseWriter, request *http.Request, repository api.ThermRepository) {
 	body, err := ioutil.ReadAll(request.Body)
 	defer request.Body.Close()
 
@@ -44,7 +44,7 @@ func add(responseWriter http.ResponseWriter, request *http.Request, repository a
 	temp, err := strconv.ParseFloat(message, 32)
 
 	if err == nil {
-		repository.Insert(api_interfaces.ThermData{
+		repository.Insert(api.ThermData{
 			CreateDate:  time.Now(),
 			Temperature: float32(temp),
 		})

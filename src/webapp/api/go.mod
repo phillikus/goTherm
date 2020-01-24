@@ -1,15 +1,15 @@
-module goTherm/api
+module github.com/goTherm/api
 
 go 1.13
 
 require (
-	goTherm/api/interfaces v0.0.0
-	goTherm/config v0.0.0
-	goTherm/db v0.0.0
+	github.com/goTherm/api/interfaces v0.0.0
+	github.com/goTherm/config v0.0.0
+	github.com/goTherm/db v0.0.0
 )
 
-replace goTherm/api/interfaces => ./interfaces
+replace github.com/goTherm/api/interfaces => ./interfaces
 
-replace goTherm/db => ./../db
+replace github.com/goTherm/db => ./../db
 
-replace goTherm/config => ./../config
+replace github.com/goTherm/config => ./../config

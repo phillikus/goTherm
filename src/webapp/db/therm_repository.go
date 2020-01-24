@@ -2,8 +2,8 @@ package db
 
 import (
 	"database/sql"
-	api_interfaces "goTherm/api/interfaces"
-	config "goTherm/config"
+	api "github.com/goTherm/api/interfaces"
+	config "github.com/goTherm/config"
 	"time"
 
 	_ "github.com/lib/pq"
@@ -16,7 +16,7 @@ type ThermRepository struct {
 type Temperature struct {
 }
 
-func (repository *ThermRepository) Insert(data api_interfaces.ThermData) {
+func (repository *ThermRepository) Insert(data api.ThermData) {
 	data.Id = 0
 
 	db := getDbConnection(repository.Config.Database.ConnectionString)
@@ -30,7 +30,7 @@ func (repository *ThermRepository) Insert(data api_interfaces.ThermData) {
 	}
 }
 
-func (repository *ThermRepository) GetLatest(count int) []api_interfaces.ThermData {
+func (repository *ThermRepository) GetLatest(count int) []api.ThermData {
 	var (
 		id          int
 		temperature float32
@@ -47,7 +47,7 @@ func (repository *ThermRepository) GetLatest(count int) []api_interfaces.ThermDa
 		panic(err)
 	}
 
-	var entries []api_interfaces.ThermData
+	var entries []api.ThermData
 
 	for rows.Next() {
 		err := rows.Scan(&id, &temperature, &create_date)
@@ -55,7 +55,7 @@ func (repository *ThermRepository) GetLatest(count int) []api_interfaces.ThermDa
 			panic(err)
 		}
 
-		entries = append(entries, api_interfaces.ThermData{
+		entries = append(entries, api.ThermData{
 			Id:          id,
 			Temperature: temperature,
 			CreateDate:  create_date,

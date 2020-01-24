@@ -2,7 +2,7 @@ package api
 
 import (
 	"bytes"
-	api_interfaces "gotherm/api/interfaces"
+	api "github.com/goTherm/api/interfaces"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -39,10 +39,10 @@ func TestPushThermDataInvalidMethod(t *testing.T) {
 type thermRepositoryFake struct {
 }
 
-func (repository *thermRepositoryFake) Insert(data api_interfaces.ThermData) {
+func (repository *thermRepositoryFake) Insert(data api.ThermData) {
 	return
 }
 
-func (repository *thermRepositoryFake) GetLatest(count int) []api_interfaces.ThermData {
-	return []api_interfaces.ThermData{}
+func (repository *thermRepositoryFake) GetLatest(count int) []api.ThermData {
+	return []api.ThermData{}
 }
