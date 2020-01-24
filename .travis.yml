@@ -7,6 +7,6 @@ env:
   - GO111MODULE=on
 
 script:
-  - cd goTherm/src/webapp/
+  - cd /home/travis/gopath/src/github.com/phillikus/goTherm/src/webapp
   - go test -v ./api/
   - go test -v ./config/
