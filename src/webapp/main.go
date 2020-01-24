@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	api "github.com/goTherm/api"
-	config "github.com/goTherm/config"
+	api "github.com/phillikus/goTherm/api"
+	config "github.com/phillikus/goTherm/config"
 )
 
 func main() {

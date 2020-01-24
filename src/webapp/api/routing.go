@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/goTherm/config"
-	"github.com/goTherm/db"
+	"github.com/phillikus/goTherm/config"
+	"github.com/phillikus/goTherm/db"
 	"log"
 	"net/http"
 	"os"

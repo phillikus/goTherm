@@ -1,3 +1,3 @@
-module github.com/goTherm/config
+module github.com/phillikus/goTherm/config
 
 go 1.13

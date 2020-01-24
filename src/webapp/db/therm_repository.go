@@ -2,8 +2,8 @@ package db
 
 import (
 	"database/sql"
-	api "github.com/goTherm/api/interfaces"
-	config "github.com/goTherm/config"
+	api "github.com/phillikus/goTherm/api/interfaces"
+	config "github.com/phillikus/goTherm/config"
 	"time"
 
 	_ "github.com/lib/pq"

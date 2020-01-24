@@ -2,13 +2,13 @@ package api
 
 import (
 	"encoding/json"
-	api "github.com/goTherm/api/interfaces"
+	api "github.com/phillikus/goTherm/api/interfaces"
 	"io/ioutil"
 	"net/http"
 	"strconv"
 	"time"
 
-	config "github.com/goTherm/config"
+	config "github.com/phillikus/goTherm/config"
 )
 
 func HandlePushThermData(config *config.Config, repository api.ThermRepository) http.HandlerFunc {
