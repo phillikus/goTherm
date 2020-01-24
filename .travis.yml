@@ -6,5 +6,7 @@ go:
 env:
   - GO111MODULE=on
 
-script: 
-  - go test -v ./...
+script:
+  - cd goTherm/src/webapp/
+  - go test -v ./api/
+  - go test -v ./config/
