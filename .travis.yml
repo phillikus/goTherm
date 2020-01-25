@@ -8,5 +8,6 @@ env:
 
 script:
   - cd /home/travis/gopath/src/github.com/phillikus/goTherm/src/webapp
+  - go build
   - go test -v github.com/phillikus/goTherm/api
   - go test -v github.com/phillikus/goTherm/config
